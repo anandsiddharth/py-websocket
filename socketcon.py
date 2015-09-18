@@ -1,3 +1,4 @@
+#!/usr/bin/python
 '''
 	(C) x-c0der
 	Slides.js Remote Server 
@@ -11,7 +12,7 @@ s = socket.socket()
 print 'Socket created'
 
 HOST = ''
-PORT = 5123
+PORT = 5124
 
 CLIENT_LIST = []
 try:
@@ -28,8 +29,10 @@ print 'Socket now listening'
 def public_broadcast_message(conn, addr, data):
 	for client in CLIENT_LIST:
 		if client != conn:
+			print data
+			client.send('\n')
 			client.send('<' + addr[0] + '>: ' + data)
-
+			client.send("<You>: ")
 
 
 def clientthread(conn, addr):
